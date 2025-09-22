@@ -1,246 +1,426 @@
 <!doctype html>
 <html lang="es">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
   <title>Sabores Locales MX – Productos artesanales</title>
+  <meta name="description" content="Del productor a tu mesa: café, miel, quesos, salsas y más. Suscríbete a la caja mensual.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
   <style>
-    :root{--brand:#2E7D32;--beige:#F5F5DC;--ink:#212121;--bg:#FAFAF7}
+    :root{--brand:#2E7D32;--brand-dark:#1B5E20;--beige:#FAF6ED;--ink:#212121;--muted:#555}
     *{box-sizing:border-box}
-    body{margin:0;font-family:system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    html{scroll-behavior:smooth}
+    body{margin:0;font-family:'Inter',system-ui,Arial,sans-serif;background:var(--beige);color:var(--ink);line-height:1.6}
+    h1,h2,h3{font-family:'Playfair Display',serif;margin:0 0 12px}
     a{text-decoration:none;color:inherit}
-    .container{max-width:1100px;margin:0 auto;padding:0 16px}
-    .btn{padding:10px 18px;border-radius:16px;font-weight:600;display:inline-block}
-    .btn-primary{background:var(--brand);color:#fff}
-    .btn-outline{border:1px solid var(--brand);color:var(--brand)}
-    header{position:sticky;top:0;background:#fff;backdrop-filter:blur(6px);border-bottom:1px solid #ddd}
-    header .nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
-    .logo{font-weight:800;display:flex;gap:8px;align-items:center}
-    .logo-icon{background:var(--brand);color:#fff;width:32px;height:32px;border-radius:10px;display:grid;place-items:center}
-    nav{display:none}
-    @media(min-width:768px){nav{display:flex;gap:18px}}
-    section{padding:60px 0}
-    .hero{background:linear-gradient(to bottom,var(--beige),transparent)}
+    .container{max-width:1120px;margin:0 auto;padding:0 16px}
+    header{position:sticky;top:0;z-index:50;background:#fff;border-bottom:1px solid #eee}
+    .nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+    .logo{display:flex;align-items:center;gap:10px;font-weight:800}
+    .logo-badge{width:34px;height:34px;border-radius:12px;background:var(--brand);display:grid;place-items:center;color:#fff}
+    .links{display:none;gap:20px;font-weight:600}
+    @media(min-width:768px){.links{display:flex}}
+    .btn{display:inline-flex;align-items:center;justify-content:center;padding:12px 20px;border-radius:20px;font-weight:600;border:2px solid transparent;transition:all .2s}
+    .btn-primary{background:var(--brand);color:#fff}.btn-primary:hover{background:var(--brand-dark)}
+    .btn-outline{border-color:var(--brand);color:var(--brand)}.btn-outline:hover{background:var(--brand);color:#fff}
+    section{padding:80px 0}
+    .hero{background:#fff}
     .grid{display:grid;gap:24px}
-    .grid-2{grid-template-columns:1fr}
-    .grid-3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
-    @media(min-width:992px){.grid-2{grid-template-columns:1fr 1fr}}
-    h1{font-size:clamp(30px,5vw,46px);margin:0}
-    .muted{color:#555}
-    .card{background:#fff;border-radius:18px;box-shadow:0 2px 5px rgba(0,0,0,.08);overflow:hidden}
-    .card-body{padding:16px}
-    .tag{position:absolute;top:10px;left:10px;background:#fff;padding:4px 10px;border-radius:12px;font-size:12px}
-    .footer{background:#fff;border-top:1px solid #ddd;padding:20px;text-align:center;font-size:14px;color:#555}
+    .g2{grid-template-columns:1fr}.g3{grid-template-columns:repeat(auto-fit,minmax(280px,1fr))}
+    @media(min-width:992px){.g2{grid-template-columns:1fr 1fr}}
+    .card{background:#fff;border-radius:18px;box-shadow:0 4px 12px rgba(0,0,0,.06);overflow:hidden;transition:transform .2s}
+    .card:hover{transform:translateY(-4px)}
+    .tag{position:absolute;top:12px;left:12px;background:#fff;padding:6px 10px;border-radius:999px;font-size:12px;box-shadow:0 2px 6px rgba(0,0,0,.08)}
+    .muted{color:var(--muted)}
+    .footer{background:#fff;border-top:1px solid #eee;padding:22px;text-align:center;font-size:14px;color:#666}
+    /* Drawer / Modal */
+    .overlay{position:fixed;inset:0;background:rgba(0,0,0,.4);display:none;align-items:center;justify-content:center;z-index:60}
+    .overlay.show{display:flex}
+    .modal{background:#fff;border-radius:16px;max-width:520px;width:92%;box-shadow:0 12px 40px rgba(0,0,0,.18);animation:pop .2s ease}
+    @keyframes pop{from{transform:scale(.98);opacity:.4}to{transform:scale(1);opacity:1}}
+    .modal header{border-bottom:1px solid #eee;padding:14px 16px}
+    .modal .content{padding:16px}
+    .row{display:grid;gap:10px}
+    @media(min-width:560px){.row2{grid-template-columns:1fr 1fr}}
+    input,textarea,select{width:100%;padding:12px;border:1px solid #ddd;border-radius:12px}
+    .toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#212121;color:#fff;padding:10px 14px;border-radius:10px;display:none;z-index:80}
+    .toast.show{display:block}
+    /* tiny fade-onscroll */
+    .fade{opacity:0;transform:translateY(16px);transition:all .5s}
+    .fade.show{opacity:1;transform:none}
   </style>
 </head>
 <body>
+
 <header>
   <div class="container nav">
-    <div class="logo"><div class="logo-icon">🍃</div>Sabores Locales MX</div>
-    <nav>
+    <a href="#home" class="logo"><span class="logo-badge">🍃</span> Sabores Locales MX</a>
+    <nav class="links">
       <a href="#catalogo">Catálogo</a>
       <a href="#suscripcion">Suscripción</a>
-      <a href="#productores">Productores</a>
       <a href="#blog">Blog</a>
       <a href="#contacto">Contacto</a>
     </nav>
-    <a class="btn btn-primary" href="#catalogo">Comprar</a>
+    <div style="display:flex;gap:8px;align-items:center">
+      <button id="btnLogin" class="btn btn-outline">Iniciar sesión</button>
+      <a class="btn btn-primary" href="#catalogo">Comprar</a>
+    </div>
   </div>
 </header>
 
-<section class="hero">
-  <div class="container grid grid-2" style="align-items:center">
-    <div>
-      <h1>Del productor a tu mesa, <span style="color:var(--brand)">sin intermediarios</span></h1>
-      <p class="muted">Descubre alimentos artesanales curados: café, miel, quesos, salsas y más. Compra por pieza o suscríbete a nuestra caja mensual.</p>
-      <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+<!-- Hero -->
+<section class="hero" id="home">
+  <div class="container grid g2" style="align-items:center">
+    <div class="fade">
+      <h1 style="font-size:clamp(34px,5vw,54px);line-height:1.2">
+        Del productor a tu mesa, <span style="color:var(--brand)">sin intermediarios</span>
+      </h1>
+      <p class="muted" style="max-width:560px;margin-top:10px">
+        Descubre alimentos artesanales curados: café, miel, quesos, salsas y más. Compra por pieza o suscríbete a nuestra caja mensual.
+      </p>
+      <div style="margin-top:18px;display:flex;gap:12px;flex-wrap:wrap">
         <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
         <a class="btn btn-outline" href="#suscripcion">Probar suscripción</a>
       </div>
     </div>
-    <div>
-      <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070305?q=80&w=1200&auto=format&fit=crop" 
-           alt="Productos artesanales" 
-           style="width:100%;border-radius:22px;box-shadow:0 10px 20px rgba(0,0,0,.15)"/>
+    <div class="fade">
+      <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070305?q=80&w=1600&auto=format&fit=crop"
+           alt="Productos artesanales" style="width:100%;border-radius:22px;box-shadow:0 12px 30px rgba(0,0,0,.15)">
     </div>
   </div>
 </section>
+
+<!-- Catálogo -->
 <section id="catalogo">
   <div class="container">
-    <h2>Catálogo destacado</h2>
-    <div class="grid grid-3" style="margin-top:20px">
-
+    <h2 style="font-size:30px">Catálogo destacado</h2>
+    <p class="muted">Compra directa o suscripción mensual.</p>
+    <div class="grid g3" style="margin-top:20px">
       <!-- Producto 1 -->
-      <div class="card">
+      <div class="card fade">
         <div style="position:relative">
-          <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?q=80&w=800&auto=format&fit=crop" 
-               alt="Miel Artesanal" 
-               style="width:100%;height:200px;object-fit:cover">
+          <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?q=80&w=1200&auto=format&fit=crop" alt="Miel artesanal" style="width:100%;height:220px;object-fit:cover">
           <span class="tag">De Morelos</span>
         </div>
-        <div class="card-body">
-          <b>Miel Artesanal 250g</b><br>
-          <span class="muted">Miel pura, sin aditivos.</span>
-          <p><b>$120 MXN</b></p>
-          <a class="btn btn-primary" href="#">Comprar</a>
+        <div style="padding:16px">
+          <h3>Miel Artesanal 250g</h3>
+          <p class="muted">Miel pura, sin aditivos ni conservadores.</p>
+          <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+            <b>$120 MXN</b>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <!-- Enlace Mercado Pago (reemplaza TU_PREF_ID_MIEL) -->
+              <a class="btn btn-primary" data-pref="TU_PREF_ID_MIEL">Comprar</a>
+              <button class="btn btn-outline" data-add="miel">Agregar</button>
+            </div>
+          </div>
         </div>
       </div>
-
       <!-- Producto 2 -->
-      <div class="card">
+      <div class="card fade">
         <div style="position:relative">
-          <img src="https://images.unsplash.com/photo-1509043759401-136742328bb3?q=80&w=800&auto=format&fit=crop" 
-               alt="Café Chiapas" 
-               style="width:100%;height:200px;object-fit:cover">
+          <img src="https://images.unsplash.com/photo-1509043759401-136742328bb3?q=80&w=1200&auto=format&fit=crop" alt="Café Chiapas" style="width:100%;height:220px;object-fit:cover">
           <span class="tag">Tueste medio</span>
         </div>
-        <div class="card-body">
-          <b>Café Chiapas 250g</b><br>
-          <span class="muted">Notas a cacao y nuez.</span>
-          <p><b>$180 MXN</b></p>
-          <a class="btn btn-primary" href="#">Comprar</a>
+        <div style="padding:16px">
+          <h3>Café Chiapas 250g</h3>
+          <p class="muted">Notas a cacao y nuez de altura chiapaneca.</p>
+          <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+            <b>$180 MXN</b>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn btn-primary" data-pref="TU_PREF_ID_CAFE">Comprar</a>
+              <button class="btn btn-outline" data-add="cafe">Agregar</button>
+            </div>
+          </div>
         </div>
       </div>
-
       <!-- Producto 3 -->
-      <div class="card">
+      <div class="card fade">
         <div style="position:relative">
-          <img src="https://images.unsplash.com/photo-1546549039-49fc02c93486?q=80&w=800&auto=format&fit=crop" 
-               alt="Queso de cabra" 
-               style="width:100%;height:200px;object-fit:cover">
+          <img src="https://images.unsplash.com/photo-1546549039-49fc02c93486?q=80&w=1200&auto=format&fit=crop" alt="Queso de cabra" style="width:100%;height:220px;object-fit:cover">
           <span class="tag">Guanajuato</span>
         </div>
-        <div class="card-body">
-          <b>Queso de cabra 250g</b><br>
-          <span class="muted">Fresco artesanal.</span>
-          <p><b>$150 MXN</b></p>
-          <a class="btn btn-primary" href="#">Comprar</a>
+        <div style="padding:16px">
+          <h3>Queso de cabra 250g</h3>
+          <p class="muted">Fresco artesanal.</p>
+          <div style="margin-top:8px;display:flex;justify-content:space-between;align-items:center">
+            <b>$150 MXN</b>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <a class="btn btn-primary" data-pref="TU_PREF_ID_QUESO">Comprar</a>
+              <button class="btn btn-outline" data-add="queso">Agregar</button>
+            </div>
+          </div>
         </div>
       </div>
+    </div>
 
+    <!-- Carrito mini -->
+    <div id="miniCart" class="card" style="margin-top:22px; display:none">
+      <div style="padding:16px">
+        <h3>Tu carrito</h3>
+        <div id="cartItems" class="muted" style="margin-top:8px"></div>
+        <div style="display:flex;justify-content:space-between;align-items:center;margin-top:12px">
+          <b id="cartTotal">$0 MXN</b>
+          <div style="display:flex;gap:8px">
+            <button id="btnClear" class="btn btn-outline">Vaciar</button>
+            <button id="btnCheckout" class="btn btn-primary">Pagar</button>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
-<section id="suscripcion" style="background:var(--beige)">
-  <div class="container grid grid-2" style="align-items:center">
-    <div>
-      <h2>Caja mensual “Sabores Locales”</h2>
-      <p class="muted">Recibe cada mes una selección curada de 6 productos artesanales: café, miel, mermelada, queso, salsa y un producto sorpresa.</p>
-      <ul class="muted">
-        <li>Ahorra 10%</li>
-        <li>Cancela cuando quieras</li>
-        <li>Envíos agrupados</li>
+
+<!-- Suscripción -->
+<section id="suscripcion" class="hero">
+  <div class="container grid g2" style="align-items:center">
+    <div class="fade">
+      <h2 style="font-size:30px">Caja mensual “Sabores Locales”</h2>
+      <p class="muted">Recibe cada mes una selección curada de 6 productos.</p>
+      <ul class="muted" style="margin-top:8px">
+        <li>✔ Ahorra 10% frente a compras sueltas</li>
+        <li>✔ Cancela cuando quieras</li>
+        <li>✔ Envíos agrupados y responsables</li>
       </ul>
     </div>
-    <div class="card">
-      <div class="card-body" style="text-align:center">
-        <h3>Plan mensual</h3>
-        <p><span style="font-size:32px;font-weight:800">$600</span> MXN</p>
-        <a class="btn btn-primary" href="#">Suscribirme</a>
-      </div>
+    <div class="card fade" style="padding:16px;text-align:center">
+      <h3>Plan mensual</h3>
+      <p><b>$600 MXN</b></p>
+      <a class="btn btn-primary" data-pref="TU_PREF_ID_SUSCRIPCION">Suscribirme</a>
     </div>
   </div>
 </section>
 
-<section id="productores">
-  <div class="container">
-    <h2>Conoce a nuestros productores</h2>
-    <div class="grid grid-3" style="margin-top:20px">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=800&auto=format&fit=crop" 
-             alt="Productor 1" style="width:100%;height:180px;object-fit:cover">
-        <div class="card-body">
-          <b>Don Pedro — Morelos</b><br>
-          <span class="muted">Apicultor con 20 años de tradición.</span>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1529692236671-f1dc28fb2d6d?q=80&w=800&auto=format&fit=crop" 
-             alt="Productor 2" style="width:100%;height:180px;object-fit:cover">
-        <div class="card-body">
-          <b>Doña Marta — Chiapas</b><br>
-          <span class="muted">Cultivadora de café de altura.</span>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1524492449090-5c1dc2fdc5b4?q=80&w=800&auto=format&fit=crop" 
-             alt="Productor 3" style="width:100%;height:180px;object-fit:cover">
-        <div class="card-body">
-          <b>Don Miguel — Guanajuato</b><br>
-          <span class="muted">Maestro quesero artesanal.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
+<!-- Blog -->
 <section id="blog">
   <div class="container">
-    <h2>Recetas y tips</h2>
-    <div class="grid grid-3" style="margin-top:20px">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1543339308-43f6f5e8cc9b?q=80&w=800&auto=format&fit=crop" 
-             alt="Receta 1" style="width:100%;height:180px;object-fit:cover">
-        <div class="card-body">
-          <b>Tostadas con queso y miel</b><br>
-          <span class="muted">Receta rápida y deliciosa.</span>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=800&auto=format&fit=crop" 
-             alt="Receta 2" style="width:100%;height:180px;object-fit:cover">
-        <div class="card-body">
-          <b>Cold brew con café de Chiapas</b><br>
-          <span class="muted">Refrescante y artesanal.</span>
-        </div>
-      </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=800&auto=format&fit=crop" 
-             alt="Receta 3" style="width:100%;height:180px;object-fit:cover">
-        <div class="card-body">
-          <b>Salsa habanero-mango</b><br>
-          <span class="muted">Perfecta para tacos de pescado.</span>
-        </div>
-      </div>
+    <h2 style="font-size:30px">Recetas y tips</h2>
+    <div class="grid g3" style="margin-top:18px">
+      <div class="card fade"><img src="https://images.unsplash.com/photo-1543339308-43f6f5e8cc9b?q=80&w=1200&auto=format&fit=crop" alt="Tostadas" style="width:100%;height:180px;object-fit:cover"><div style="padding:14px"><b>Tostadas con queso y miel</b><div class="muted">Rápida y deliciosa.</div></div></div>
+      <div class="card fade"><img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=1200&auto=format&fit=crop" alt="Cold brew" style="width:100%;height:180px;object-fit:cover"><div style="padding:14px"><b>Cold brew con café de Chiapas</b><div class="muted">Refrescante y artesanal.</div></div></div>
+      <div class="card fade"><img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=1200&auto=format&fit=crop" alt="Salsa" style="width:100%;height:180px;object-fit:cover"><div style="padding:14px"><b>Salsa habanero-mango</b><div class="muted">Perfecta para tacos.</div></div></div>
     </div>
   </div>
 </section>
 
-<section id="newsletter" style="background:var(--brand);color:#fff;text-align:center">
-  <div class="container">
-    <h2>Únete al boletín</h2>
-    <p style="opacity:.9">Recibe recetas, lanzamientos y promos exclusivas 1 vez por semana.</p>
-    <form style="margin-top:16px">
-      <input type="email" placeholder="tu@email.com" 
-             style="padding:12px;border-radius:14px;border:none;width:250px;max-width:80%">
-      <button class="btn btn-primary" style="background:#fff;color:var(--brand);margin-left:8px">Suscribirme</button>
-    </form>
-  </div>
-</section>
-
-<section id="contacto">
-  <div class="container grid grid-2" style="align-items:start">
-    <div>
-      <h2>Contacto</h2>
+<!-- Contacto -->
+<section id="contacto" class="hero">
+  <div class="container grid g2" style="align-items:start">
+    <div class="fade">
+      <h2 style="font-size:30px">Contacto</h2>
       <p class="muted">¿Eres productor o tienes dudas? Escríbenos y te respondemos pronto.</p>
       <p><b>Email:</b> hola@saboreslocales.mx</p>
       <p><b>Horario:</b> Lun–Vie 9:00–18:00</p>
     </div>
-    <div class="card">
-      <div class="card-body">
-        <form>
-          <input type="text" placeholder="Nombre" style="width:100%;margin-bottom:10px;padding:10px;border-radius:10px;border:1px solid #ccc">
-          <input type="email" placeholder="Email" style="width:100%;margin-bottom:10px;padding:10px;border-radius:10px;border:1px solid #ccc">
-          <textarea placeholder="Mensaje" style="width:100%;margin-bottom:10px;padding:10px;border-radius:10px;border:1px solid #ccc;min-height:100px"></textarea>
-          <button class="btn btn-primary" type="submit">Enviar</button>
-        </form>
-      </div>
+    <div class="card fade" style="padding:16px">
+      <form onsubmit="alert('¡Mensaje enviado!'); this.reset(); return false;">
+        <div class="row row2">
+          <input placeholder="Nombre" required>
+          <input placeholder="Email" type="email" required>
+        </div>
+        <input placeholder="Asunto" style="margin-top:10px" required>
+        <textarea placeholder="Mensaje" style="margin-top:10px;min-height:110px" required></textarea>
+        <button class="btn btn-primary" style="margin-top:10px">Enviar</button>
+      </form>
     </div>
   </div>
 </section>
 
 <footer class="footer">
-  © 2025 Sabores Locales MX. Todos los derechos reservados.
+  © <span id="year"></span> Sabores Locales MX. Todos los derechos reservados.
 </footer>
 
+<!-- Login modal -->
+<div id="loginOverlay" class="overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true">
+    <header class="nav" style="padding:10px 14px">
+      <strong>Iniciar sesión</strong>
+      <button class="btn btn-outline" onclick="closeLogin()">Cerrar</button>
+    </header>
+    <div class="content">
+      <form onsubmit="doLogin(event)" class="row">
+        <input id="loginEmail" type="email" placeholder="Tu email" required>
+        <input id="loginName" placeholder="Tu nombre (opcional)">
+        <button class="btn btn-primary">Entrar</button>
+        <small class="muted">Guardamos tu sesión en este navegador para recordar tu progreso.</small>
+      </form>
+    </div>
+  </div>
+</div>
+
+<!-- Checkout modal (cuando no hay pref_id) -->
+<div id="checkoutOverlay" class="overlay" aria-hidden="true">
+  <div class="modal" role="dialog" aria-modal="true">
+    <header class="nav" style="padding:10px 14px">
+      <strong>Finalizar compra</strong>
+      <button class="btn btn-outline" onclick="closeCheckout()">Cerrar</button>
+    </header>
+    <div class="content">
+      <form onsubmit="confirmOrder(event)" class="row">
+        <div class="row row2">
+          <input id="cNombre" placeholder="Nombre" required>
+          <input id="cApellidos" placeholder="Apellidos" required>
+        </div>
+        <input id="cEmail" type="email" placeholder="Email" required>
+        <input id="cTel" placeholder="Teléfono" required>
+        <input id="cDir" placeholder="Dirección completa" required>
+        <select id="cPago" required>
+          <option value="">Método de pago</option>
+          <option>Transferencia</option>
+          <option>Pago contra entrega</option>
+        </select>
+        <button class="btn btn-primary">Confirmar pedido</button>
+        <small class="muted">Si luego agregas Mercado Pago real, los botones irán directo al checkout.</small>
+      </form>
+    </div>
+  </div>
+</div>
+
+<div id="toast" class="toast">Guardado</div>
+
+<script>
+/* ======== CONFIGURA AQUÍ tus pref_ids de Mercado Pago (opcional) ======== */
+const MP_PREFS = {
+  miel:  "TU_PREF_ID_MIEL",
+  cafe:  "TU_PREF_ID_CAFE",
+  queso: "TU_PREF_ID_QUESO",
+  suscripcion: "TU_PREF_ID_SUSCRIPCION"
+};
+/* Si dejas estos valores vacíos, se abrirá el checkout interno (formulario) y se te armará un mensaje de WhatsApp con el pedido. */
+/* ======================================================================== */
+
+const state = {
+  cart: JSON.parse(localStorage.getItem('cart_slmx')||'[]'),
+  user: JSON.parse(localStorage.getItem('user_slmx')||'null'),
+  pendingItem: null
+};
+
+const prices = { miel:120, cafe:180, queso:150 };
+const names  = { miel:"Miel Artesanal 250g", cafe:"Café Chiapas 250g", queso:"Queso de cabra 250g" };
+
+const $ = sel => document.querySelector(sel);
+const $$ = sel => Array.from(document.querySelectorAll(sel));
+const toast = (msg='Guardado') => { const t=$("#toast"); t.textContent=msg; t.classList.add('show'); setTimeout(()=>t.classList.remove('show'),1400); };
+
+function save(){ localStorage.setItem('cart_slmx', JSON.stringify(state.cart)); renderCart(); }
+function addItem(key){ const f=state.cart.find(i=>i.key===key); if(f){f.qty++} else { state.cart.push({key, qty:1, name:names[key], price:prices[key]}) } save(); toast('Agregado al carrito'); }
+function clearCart(){ state.cart = []; save(); }
+function cartTotal(){ return state.cart.reduce((s,i)=>s+i.price*i.qty,0) }
+
+function renderCart(){
+  const box = $("#miniCart");
+  const list = $("#cartItems");
+  const total = $("#cartTotal");
+  if(state.cart.length===0){ box.style.display='none'; return; }
+  box.style.display='block';
+  list.innerHTML = state.cart.map(i=>`• ${i.name} x ${i.qty}`).join('<br>');
+  total.textContent = new Intl.NumberFormat('es-MX',{style:'currency',currency:'MXN'}).format(cartTotal());
+}
+
+function openLogin(){ $("#loginOverlay").classList.add('show'); $("#loginEmail").focus(); }
+function closeLogin(){ $("#loginOverlay").classList.remove('show'); }
+function doLogin(e){
+  e.preventDefault();
+  const email = $("#loginEmail").value.trim();
+  const name = $("#loginName").value.trim();
+  state.user = { email, name };
+  localStorage.setItem('user_slmx', JSON.stringify(state.user));
+  closeLogin();
+  $("#btnLogin").textContent = "Cerrar sesión";
+  toast('Sesión iniciada');
+}
+function doLogout(){
+  localStorage.removeItem('user_slmx');
+  state.user = null;
+  $("#btnLogin").textContent = "Iniciar sesión";
+  toast('Sesión cerrada');
+}
+
+function openCheckout(){ $("#checkoutOverlay").classList.add('show'); $("#cNombre").focus(); }
+function closeCheckout(){ $("#checkoutOverlay").classList.remove('show'); }
+
+function confirmOrder(e){
+  e.preventDefault();
+  const data = {
+    nombre: $("#cNombre").value, apellidos: $("#cApellidos").value, email: $("#cEmail").value,
+    tel: $("#cTel").value, dir: $("#cDir").value, pago: $("#cPago").value,
+    items: state.cart, total: cartTotal()
+  };
+  // Redirige a WhatsApp con el pedido armado:
+  const resumen = encodeURIComponent(`Pedido Sabores Locales MX%0ACliente: ${data.nombre} ${data.apellidos}%0AEmail: ${data.email}%0ATeléfono: ${data.tel}%0ADirección: ${data.dir}%0APago: ${data.pago}%0AItems:%0A${data.items.map(i=>`- ${i.name} x${i.qty}`).join('%0A')}%0ATotal: $${data.total} MXN`);
+  // Cambia por tu número con código de país, ej. 5215512345678
+  const phone = "5215512345678";
+  window.location.href = `https://wa.me/${phone}?text=${resumen}`;
+  state.cart = []; save(); closeCheckout();
+}
+
+function goMercadoPago(prefId){
+  // URL oficial de redirección Checkout Pro
+  window.location.href = `https://www.mercadopago.com.mx/checkout/v1/redirect?pref_id=${encodeURIComponent(prefId)}`;
+}
+
+function handleBuy(keyOrPref){
+  // Si nos pasan un pref ID literal:
+  if(keyOrPref.startsWith && keyOrPref.startsWith("PREF")){
+    goMercadoPago(keyOrPref); return;
+  }
+  // Si tenemos pref configurado para el producto:
+  const pref = MP_PREFS[keyOrPref];
+  if(pref && !pref.includes("TU_PREF_ID")){
+    goMercadoPago(pref);
+  } else {
+    // Sin pref: abrimos checkout interno
+    // Además, si el cliente dio click en Comprar directo, cargamos 1 pieza al carrito por si no estaba
+    addItem(keyOrPref);
+    openCheckout();
+  }
+}
+
+/* ======== EVENTOS ======== */
+window.addEventListener('DOMContentLoaded', ()=>{
+  // Año en footer
+  $("#year").textContent = new Date().getFullYear();
+
+  // Render inicial carrito
+  renderCart();
+
+  // Botón login/logout
+  $("#btnLogin").addEventListener('click', ()=>{
+    if(state.user){ doLogout(); } else { openLogin(); }
+  });
+
+  // Botones agregar
+  $$("[data-add]").forEach(btn=>{
+    btn.addEventListener('click', ()=> addItem(btn.getAttribute('data-add')));
+  });
+
+  // Botones comprar (Mercado Pago directo si hay pref; si no, checkout interno)
+  $$("[data-pref]").forEach(a=>{
+    a.addEventListener('click', ()=>{
+      const label = a.getAttribute('data-pref');
+      switch(label){
+        case 'TU_PREF_ID_MIEL': handleBuy('miel'); break;
+        case 'TU_PREF_ID_CAFE': handleBuy('cafe'); break;
+        case 'TU_PREF_ID_QUESO': handleBuy('queso'); break;
+        case 'TU_PREF_ID_SUSCRIPCION': handleBuy('suscripcion'); break;
+        default:
+          // Si por alguna razón nos llega un pref real aquí, redirigimos directo
+          if(label && !label.includes('TU_PREF_ID')) goMercadoPago(label);
+      }
+    });
+  });
+
+  // Carrito: Vaciar / Pagar
+  $("#btnClear").addEventListener('click', clearCart);
+  $("#btnCheckout").addEventListener('click', openCheckout);
+
+  // Aparición suave al hacer scroll
+  const io = new IntersectionObserver((entries)=>{
+    entries.forEach(e=>{ if(e.isIntersecting) e.target.classList.add('show'); });
+  }, {threshold:.08});
+  $$('.fade').forEach(el=>io.observe(el));
+});
+</script>
 </body>
 </html>
