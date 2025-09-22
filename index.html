@@ -1,0 +1,246 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Sabores Locales MX – Productos artesanales</title>
+  <style>
+    :root{--brand:#2E7D32;--beige:#F5F5DC;--ink:#212121;--bg:#FAFAF7}
+    *{box-sizing:border-box}
+    body{margin:0;font-family:system-ui,Arial,sans-serif;background:var(--bg);color:var(--ink)}
+    a{text-decoration:none;color:inherit}
+    .container{max-width:1100px;margin:0 auto;padding:0 16px}
+    .btn{padding:10px 18px;border-radius:16px;font-weight:600;display:inline-block}
+    .btn-primary{background:var(--brand);color:#fff}
+    .btn-outline{border:1px solid var(--brand);color:var(--brand)}
+    header{position:sticky;top:0;background:#fff;backdrop-filter:blur(6px);border-bottom:1px solid #ddd}
+    header .nav{display:flex;justify-content:space-between;align-items:center;padding:14px 0}
+    .logo{font-weight:800;display:flex;gap:8px;align-items:center}
+    .logo-icon{background:var(--brand);color:#fff;width:32px;height:32px;border-radius:10px;display:grid;place-items:center}
+    nav{display:none}
+    @media(min-width:768px){nav{display:flex;gap:18px}}
+    section{padding:60px 0}
+    .hero{background:linear-gradient(to bottom,var(--beige),transparent)}
+    .grid{display:grid;gap:24px}
+    .grid-2{grid-template-columns:1fr}
+    .grid-3{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}
+    @media(min-width:992px){.grid-2{grid-template-columns:1fr 1fr}}
+    h1{font-size:clamp(30px,5vw,46px);margin:0}
+    .muted{color:#555}
+    .card{background:#fff;border-radius:18px;box-shadow:0 2px 5px rgba(0,0,0,.08);overflow:hidden}
+    .card-body{padding:16px}
+    .tag{position:absolute;top:10px;left:10px;background:#fff;padding:4px 10px;border-radius:12px;font-size:12px}
+    .footer{background:#fff;border-top:1px solid #ddd;padding:20px;text-align:center;font-size:14px;color:#555}
+  </style>
+</head>
+<body>
+<header>
+  <div class="container nav">
+    <div class="logo"><div class="logo-icon">🍃</div>Sabores Locales MX</div>
+    <nav>
+      <a href="#catalogo">Catálogo</a>
+      <a href="#suscripcion">Suscripción</a>
+      <a href="#productores">Productores</a>
+      <a href="#blog">Blog</a>
+      <a href="#contacto">Contacto</a>
+    </nav>
+    <a class="btn btn-primary" href="#catalogo">Comprar</a>
+  </div>
+</header>
+
+<section class="hero">
+  <div class="container grid grid-2" style="align-items:center">
+    <div>
+      <h1>Del productor a tu mesa, <span style="color:var(--brand)">sin intermediarios</span></h1>
+      <p class="muted">Descubre alimentos artesanales curados: café, miel, quesos, salsas y más. Compra por pieza o suscríbete a nuestra caja mensual.</p>
+      <div style="margin-top:16px;display:flex;gap:10px;flex-wrap:wrap">
+        <a class="btn btn-primary" href="#catalogo">Ver catálogo</a>
+        <a class="btn btn-outline" href="#suscripcion">Probar suscripción</a>
+      </div>
+    </div>
+    <div>
+      <img src="https://images.unsplash.com/photo-1526318472351-c75fcf070305?q=80&w=1200&auto=format&fit=crop" 
+           alt="Productos artesanales" 
+           style="width:100%;border-radius:22px;box-shadow:0 10px 20px rgba(0,0,0,.15)"/>
+    </div>
+  </div>
+</section>
+<section id="catalogo">
+  <div class="container">
+    <h2>Catálogo destacado</h2>
+    <div class="grid grid-3" style="margin-top:20px">
+
+      <!-- Producto 1 -->
+      <div class="card">
+        <div style="position:relative">
+          <img src="https://images.unsplash.com/photo-1514996937319-344454492b37?q=80&w=800&auto=format&fit=crop" 
+               alt="Miel Artesanal" 
+               style="width:100%;height:200px;object-fit:cover">
+          <span class="tag">De Morelos</span>
+        </div>
+        <div class="card-body">
+          <b>Miel Artesanal 250g</b><br>
+          <span class="muted">Miel pura, sin aditivos.</span>
+          <p><b>$120 MXN</b></p>
+          <a class="btn btn-primary" href="#">Comprar</a>
+        </div>
+      </div>
+
+      <!-- Producto 2 -->
+      <div class="card">
+        <div style="position:relative">
+          <img src="https://images.unsplash.com/photo-1509043759401-136742328bb3?q=80&w=800&auto=format&fit=crop" 
+               alt="Café Chiapas" 
+               style="width:100%;height:200px;object-fit:cover">
+          <span class="tag">Tueste medio</span>
+        </div>
+        <div class="card-body">
+          <b>Café Chiapas 250g</b><br>
+          <span class="muted">Notas a cacao y nuez.</span>
+          <p><b>$180 MXN</b></p>
+          <a class="btn btn-primary" href="#">Comprar</a>
+        </div>
+      </div>
+
+      <!-- Producto 3 -->
+      <div class="card">
+        <div style="position:relative">
+          <img src="https://images.unsplash.com/photo-1546549039-49fc02c93486?q=80&w=800&auto=format&fit=crop" 
+               alt="Queso de cabra" 
+               style="width:100%;height:200px;object-fit:cover">
+          <span class="tag">Guanajuato</span>
+        </div>
+        <div class="card-body">
+          <b>Queso de cabra 250g</b><br>
+          <span class="muted">Fresco artesanal.</span>
+          <p><b>$150 MXN</b></p>
+          <a class="btn btn-primary" href="#">Comprar</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+<section id="suscripcion" style="background:var(--beige)">
+  <div class="container grid grid-2" style="align-items:center">
+    <div>
+      <h2>Caja mensual “Sabores Locales”</h2>
+      <p class="muted">Recibe cada mes una selección curada de 6 productos artesanales: café, miel, mermelada, queso, salsa y un producto sorpresa.</p>
+      <ul class="muted">
+        <li>Ahorra 10%</li>
+        <li>Cancela cuando quieras</li>
+        <li>Envíos agrupados</li>
+      </ul>
+    </div>
+    <div class="card">
+      <div class="card-body" style="text-align:center">
+        <h3>Plan mensual</h3>
+        <p><span style="font-size:32px;font-weight:800">$600</span> MXN</p>
+        <a class="btn btn-primary" href="#">Suscribirme</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="productores">
+  <div class="container">
+    <h2>Conoce a nuestros productores</h2>
+    <div class="grid grid-3" style="margin-top:20px">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1524592094714-0f0654e20314?q=80&w=800&auto=format&fit=crop" 
+             alt="Productor 1" style="width:100%;height:180px;object-fit:cover">
+        <div class="card-body">
+          <b>Don Pedro — Morelos</b><br>
+          <span class="muted">Apicultor con 20 años de tradición.</span>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1529692236671-f1dc28fb2d6d?q=80&w=800&auto=format&fit=crop" 
+             alt="Productor 2" style="width:100%;height:180px;object-fit:cover">
+        <div class="card-body">
+          <b>Doña Marta — Chiapas</b><br>
+          <span class="muted">Cultivadora de café de altura.</span>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1524492449090-5c1dc2fdc5b4?q=80&w=800&auto=format&fit=crop" 
+             alt="Productor 3" style="width:100%;height:180px;object-fit:cover">
+        <div class="card-body">
+          <b>Don Miguel — Guanajuato</b><br>
+          <span class="muted">Maestro quesero artesanal.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section id="blog">
+  <div class="container">
+    <h2>Recetas y tips</h2>
+    <div class="grid grid-3" style="margin-top:20px">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1543339308-43f6f5e8cc9b?q=80&w=800&auto=format&fit=crop" 
+             alt="Receta 1" style="width:100%;height:180px;object-fit:cover">
+        <div class="card-body">
+          <b>Tostadas con queso y miel</b><br>
+          <span class="muted">Receta rápida y deliciosa.</span>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1517705008128-361805f42e86?q=80&w=800&auto=format&fit=crop" 
+             alt="Receta 2" style="width:100%;height:180px;object-fit:cover">
+        <div class="card-body">
+          <b>Cold brew con café de Chiapas</b><br>
+          <span class="muted">Refrescante y artesanal.</span>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?q=80&w=800&auto=format&fit=crop" 
+             alt="Receta 3" style="width:100%;height:180px;object-fit:cover">
+        <div class="card-body">
+          <b>Salsa habanero-mango</b><br>
+          <span class="muted">Perfecta para tacos de pescado.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="newsletter" style="background:var(--brand);color:#fff;text-align:center">
+  <div class="container">
+    <h2>Únete al boletín</h2>
+    <p style="opacity:.9">Recibe recetas, lanzamientos y promos exclusivas 1 vez por semana.</p>
+    <form style="margin-top:16px">
+      <input type="email" placeholder="tu@email.com" 
+             style="padding:12px;border-radius:14px;border:none;width:250px;max-width:80%">
+      <button class="btn btn-primary" style="background:#fff;color:var(--brand);margin-left:8px">Suscribirme</button>
+    </form>
+  </div>
+</section>
+
+<section id="contacto">
+  <div class="container grid grid-2" style="align-items:start">
+    <div>
+      <h2>Contacto</h2>
+      <p class="muted">¿Eres productor o tienes dudas? Escríbenos y te respondemos pronto.</p>
+      <p><b>Email:</b> hola@saboreslocales.mx</p>
+      <p><b>Horario:</b> Lun–Vie 9:00–18:00</p>
+    </div>
+    <div class="card">
+      <div class="card-body">
+        <form>
+          <input type="text" placeholder="Nombre" style="width:100%;margin-bottom:10px;padding:10px;border-radius:10px;border:1px solid #ccc">
+          <input type="email" placeholder="Email" style="width:100%;margin-bottom:10px;padding:10px;border-radius:10px;border:1px solid #ccc">
+          <textarea placeholder="Mensaje" style="width:100%;margin-bottom:10px;padding:10px;border-radius:10px;border:1px solid #ccc;min-height:100px"></textarea>
+          <button class="btn btn-primary" type="submit">Enviar</button>
+        </form>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer class="footer">
+  © 2025 Sabores Locales MX. Todos los derechos reservados.
+</footer>
+
+</body>
+</html>
